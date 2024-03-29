@@ -13,15 +13,25 @@ using std::string;
 class MDParser
     {
 public:
-    struct Data; // Struct of the Markdown document, also has an enum
-                 // inside the implementation with the possible data types
+	
+	// Struct of the Markdown document, also has an enum
+	// inside the implementation with the possible data types
+    struct Data{
+		std::string title;
+		std::string author;
+		std::string date;
+		std::string content;
+	};;
     
     
     static Data ReadMD(const string& mdPath);
-    static string ReadTemplate(const string& templatePath);
-    
+    static void GenerateHtml(const string &templatePath, const string &outputPath, Data &data);
+	
+private:
+	static void CopyFiles(std::ifstream& original, std::ofstream& destiny);
+	static void ChangeHtmlContent(const std::string htmlPath, Data &data);
 	// TODO: static string MakeJson(const string& mdPath);
-    static void MakeHtml();
+    //static void MakeHtml();
 
 
 private:
